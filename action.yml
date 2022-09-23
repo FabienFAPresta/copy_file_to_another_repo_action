@@ -37,7 +37,7 @@ inputs:
     default: github.com
   pull_request_reviewers:
     description: "Pull request reviewers users"
-    required: false
+    required: true
 runs:
   using: "docker"
   image: "Dockerfile"
