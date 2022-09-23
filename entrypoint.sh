@@ -66,6 +66,12 @@ then
   git commit --message "$INPUT_COMMIT_MESSAGE"
   echo "Pushing git commit"
   git push -u origin HEAD:"$OUTPUT_BRANCH"
+  echo "Creating a pull request"
+  gh pr create -t $OUTPUT_BRANCH \
+               -b $OUTPUT_BRANCH \
+               -B $INPUT_DESTINATION_BRANCH \
+               -H $OUTPUT_BRANCH \
+                  $PULL_REQUEST_REVIEWERS
 else
   echo "No changes detected"
 fi
