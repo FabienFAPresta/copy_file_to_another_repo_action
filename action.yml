@@ -38,6 +38,9 @@ inputs:
   pull_request_reviewers:
     description: "Pull request reviewers users"
     required: false
+  pull_request_title:
+    description: "Pull request title"
+    required: true
 runs:
   using: "docker"
   image: "Dockerfile"
@@ -53,6 +56,7 @@ runs:
     - ${{ inputs.rename }}
     - ${{ inputs.use-rsync }}
     - ${{ inputs.pull-request-reviewers }}
+    - ${{ inputs.pull-request-title }}
 branding:
   icon: "git-commit"
   color: "green"
