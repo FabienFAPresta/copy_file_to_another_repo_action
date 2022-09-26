@@ -1,5 +1,8 @@
 # copy_file_to_another_repo_action
-This GitHub Action copies a file from the current repository to a location in another repository
+
+This GitHub Action copies a file from the current repository to a location in another repository and perform a pull request on the destination repository.
+
+This is a fork of the original [copy_file_to_another_repo_action](https://github.com/dmnemec/copy_file_to_another_repo_action) actions by dmnemec. This fork add the pull request creation after the copy.
 
 # Example Workflow
     name: Push File
@@ -14,7 +17,7 @@ This GitHub Action copies a file from the current repository to a location in an
           uses: actions/checkout@v2
 
         - name: Pushes test file
-          uses: dmnemec/copy_file_to_another_repo_action@main
+          uses: FabienFAPresta/copy_file_to_another_repo_action@main
           env:
             API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
           with:
@@ -24,6 +27,8 @@ This GitHub Action copies a file from the current repository to a location in an
             user_email: 'example@email.com'
             user_name: 'dmnemec'
             commit_message: 'A custom message for the commit'
+            pull_request_reviewers: reviewer1,reviewer2
+            pull_request_title: 'New pull request after file copy'
 
 # Variables
 
@@ -38,6 +43,8 @@ The `API_TOKEN_GITHUB` needs to be set in the `Secrets` section of your reposito
 * destination_branch_create: [optional] A branch to be created with this commit, defaults to commiting in `destination_branch`
 * commit_message: [optional] A custom commit message for the commit. Defaults to `Update from https://github.com/${GITHUB_REPOSITORY}/commit/${GITHUB_SHA}`
 * use_rsync: [optional] Uses `rsync -avh` instead of `cp -R` to perform the base operation. Currently works as an experimental feature (due to lack of testing) but can speed up updates to large collections of files with many small changes by only syncing the changes and not copying the entire contents again. Please understand your use case before using this, and provide feedback as issues if needed.
+* pull_request_reviewers: [optional] Specify reviewers for the pull request. It can be only one reviewer or many reviewers seperated by a coma. (Example: reviewer1,reviewer2)
+* pull_request_title: The pull request title.
 
 # Behavior Notes
 The action will create any destination paths if they don't exist. It will also overwrite existing files if they already exist in the locations being copied to. It will not delete the entire destination repository.
