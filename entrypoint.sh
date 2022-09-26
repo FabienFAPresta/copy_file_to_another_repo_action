@@ -72,7 +72,7 @@ then
                -b $OUTPUT_BRANCH \
                -B $INPUT_DESTINATION_BRANCH \
                -H $OUTPUT_BRANCH \
-               -t $INPUT_PULL_REQUEST_TITLE \
+               -t "$INPUT_PULL_REQUEST_TITLE" \
                -r $INPUT_PULL_REQUEST_REVIEWERS
 else
   echo "No changes detected"
