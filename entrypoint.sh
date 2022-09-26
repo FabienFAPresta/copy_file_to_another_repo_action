@@ -73,7 +73,7 @@ then
                -B $INPUT_DESTINATION_BRANCH \
                -H $OUTPUT_BRANCH \
                -t "Test PR" \
-               -r $PULL_REQUEST_REVIEWERS
+               -r $INPUT_PULL_REQUEST_REVIEWERS
 else
   echo "No changes detected"
 fi
